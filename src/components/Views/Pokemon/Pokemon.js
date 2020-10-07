@@ -1,29 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import './Pokemon.css';
+
 class Pokemon extends Component {
   state = {};
   componentDidMount() {
-    console.log(this.props.match.params.id);
+    if (this.props.store.pokemonReducer.length === 0) {
+      this.props.dispatch({ type: 'GET_POKEMON' });
+    }
+  }
+  backClicked = (event) => {
+    this.props.history.push('/');
+  };
+
+  render() {
+    if (this.props.store.pokemonReducer.length === 0) return <div>Loading</div>;
 
     let currentId = this.props.match.params.id;
     let currentPokemon = {};
     for (let pokemon of this.props.store.pokemonReducer) {
-      if (currentId == pokemon.id) {
+      if (parseInt(currentId) === pokemon.id) {
         currentPokemon = pokemon;
       }
     }
-    this.setState(
-      {
-        pokemon: currentPokemon,
-      },
-      () => {
-        console.log(this.state.pokemon);
-      }
+
+    if (!currentPokemon.id)
+      return (
+        <div>
+          <div>
+            <button onClick={this.backClicked}>BACK</button>
+          </div>
+          <h1>No Pokemon Found</h1>
+        </div>
+      );
+
+    const typesArray = currentPokemon.types
+      ? currentPokemon.types.map((item, index) => {
+          return <span key={index}>{item.toUpperCase()} </span>;
+        })
+      : [];
+
+    return (
+      <div className="currentPokemon">
+        <div>
+          <button onClick={this.backClicked}>BACK</button>
+        </div>
+        <img src={currentPokemon.images} alt={currentPokemon.name} />
+        <h1>{currentPokemon.name}</h1>
+        <h6>Types: {typesArray}</h6>
+        <p>{currentPokemon.description}</p>
+      </div>
     );
-  }
-  render() {
-    return <div> {/* <h1>{this.state.pokemon.name}</h1>{' '} */}</div>;
   }
 }
 
