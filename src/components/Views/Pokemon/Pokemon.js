@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './Pokemon.css';
+import { Button } from '@material-ui/core';
 
 class Pokemon extends Component {
   state = {};
@@ -29,7 +30,9 @@ class Pokemon extends Component {
       return (
         <div>
           <div>
-            <button onClick={this.backClicked}>BACK</button>
+            <Button variant="contained" onClick={this.backClicked}>
+              BACK
+            </Button>
           </div>
           <h1>No Pokemon Found</h1>
         </div>
@@ -43,8 +46,10 @@ class Pokemon extends Component {
 
     return (
       <div className="currentPokemon">
-        <div>
-          <button onClick={this.backClicked}>BACK</button>
+        <div className="button">
+          <Button variant="contained" onClick={this.backClicked}>
+            BACK
+          </Button>
         </div>
         <img src={currentPokemon.images} alt={currentPokemon.name} />
         <h1>{currentPokemon.name}</h1>

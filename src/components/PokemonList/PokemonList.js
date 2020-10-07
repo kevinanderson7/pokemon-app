@@ -7,7 +7,7 @@ class PokemonList extends Component {
     const pokemonListArray = this.props.store.pokemonReducer.map(
       (item, index) => {
         return (
-          <div className="pokemonListItem">
+          <div key={index} className="pokemonListItem">
             <PokemonListItem
               pokemon={item}
               clickPokemon={this.props.clickPokemon}
