@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PokemonListItem from '../PokemonListItem/PokemonListItem';
 import './PokemonList.css';
 class PokemonList extends Component {
   render() {
@@ -7,8 +8,10 @@ class PokemonList extends Component {
       (item, index) => {
         return (
           <div className="pokemonListItem">
-            <img alt="pokemon" src={item.images} />
-            <h4>{item.name}</h4>
+            <PokemonListItem
+              pokemon={item}
+              clickPokemon={this.props.clickPokemon}
+            />
           </div>
         );
       }

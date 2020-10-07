@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './PokemonListItem.css';
+
 class PokemonListItem extends Component {
   render() {
     return (
-      <div className="pokemonListItem">
+      <div
+        className="pokemonListItem"
+        onClick={this.props.clickPokemon(this.props.pokemon.id)}
+      >
         <img
           alt={this.props.pokemon.description}
           src={this.props.pokemon.images}
