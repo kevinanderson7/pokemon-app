@@ -43,20 +43,35 @@ class Pokemon extends Component {
           return <span key={index}>{item.toUpperCase()} </span>;
         })
       : [];
-
-    return (
-      <div className="currentPokemon">
-        <div className="button">
-          <Button variant="contained" onClick={this.backClicked}>
-            BACK
-          </Button>
+    if (typesArray.length > 1) {
+      return (
+        <div className="currentPokemon">
+          <div className="button">
+            <Button variant="contained" onClick={this.backClicked}>
+              BACK
+            </Button>
+          </div>
+          <img src={currentPokemon.images} alt={currentPokemon.name} />
+          <h1>{currentPokemon.name}</h1>
+          <h6>Types: {typesArray}</h6>
+          <p>{currentPokemon.description}</p>
         </div>
-        <img src={currentPokemon.images} alt={currentPokemon.name} />
-        <h1>{currentPokemon.name}</h1>
-        <h6>Types: {typesArray}</h6>
-        <p>{currentPokemon.description}</p>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="currentPokemon">
+          <div className="button">
+            <Button variant="contained" onClick={this.backClicked}>
+              BACK
+            </Button>
+          </div>
+          <img src={currentPokemon.images} alt={currentPokemon.name} />
+          <h1>{currentPokemon.name}</h1>
+          <h6>Type: {typesArray}</h6>
+          <p>{currentPokemon.description}</p>
+        </div>
+      );
+    }
   }
 }
 
